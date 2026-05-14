@@ -1,5 +1,14 @@
 package TridentII;
 
+import TridentII.command.TridentVillagersCommand;
+import TridentII.config.PluginConfig;
+import TridentII.format.TextFormatter;
+import TridentII.message.MessageService;
+import TridentII.menu.VillagerMenuService;
+import TridentII.villager.BribeStorage;
+import TridentII.villager.RestockService;
+import TridentII.villager.VillagerMenuListener;
+import TridentII.villager.VillagerTradeService;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -38,9 +47,11 @@ public final class TridentVillagers extends JavaPlugin {
 
     private void loadServices() {
         pluginConfig = new PluginConfig(this);
-        messageService = new MessageService(this, pluginConfig);
-        VillagerTradeService tradeService = new VillagerTradeService(pluginConfig);
-        VillagerMenuService menuService = new VillagerMenuService(this, pluginConfig);
+        TextFormatter formatter = new TextFormatter();
+        BribeStorage bribeStorage = new BribeStorage(this);
+        messageService = new MessageService(this, pluginConfig, formatter);
+        VillagerTradeService tradeService = new VillagerTradeService(pluginConfig, bribeStorage);
+        VillagerMenuService menuService = new VillagerMenuService(pluginConfig, formatter);
         menuListener = new VillagerMenuListener(this, pluginConfig, messageService, menuService, tradeService);
         restockService = new RestockService(this, pluginConfig, tradeService);
     }

@@ -1,4 +1,4 @@
-prefix: "<gradient:#00d4ff:#00ff88>TridentVillagers</gradient> <grey>»</grey>"
+prefix: "<gradient:#00d4ff:#00ff88>TridentVillagers</gradient> <grey>></grey>"
 
 messages:
   startup: "%prefix% <grey>enabled.</grey>"
@@ -55,17 +55,17 @@ restock:
   reset-demand: true
 
 bribes:
+  curing:
+    cure-reputation-value: 20
+    max-cures-per-player: 5
   defaults:
-    major-positive-reputation: 20
-    special-price-discount: 5
+    cure-count: 1
   accepted-items:
     emerald:
       material: EMERALD
       amount: 8
-      major-positive-reputation: 20
-      special-price-discount: 5
+      cure-count: 1
     emerald-block:
       material: EMERALD_BLOCK
       amount: 1
-      major-positive-reputation: 50
-      special-price-discount: 10
+      cure-count: 3
