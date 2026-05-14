@@ -58,6 +58,8 @@ bribes:
   curing:
     cure-reputation-value: 20
     max-cures-per-player: 5
+    price-discount-per-cure: 20
+    max-price-discount: 100
   defaults:
     cure-count: 1
   accepted-items:

@@ -1,5 +1,11 @@
 # Devlog
 
+## Update 1.4-B
+
+- Fixed bribe discounts not showing in villager trades by applying saved cure counts directly to merchant recipe pricing.
+- Reordered trade opening so restocking happens before saved cure discounts are applied.
+- Added configurable cure-style price discount controls.
+
 ## Update 1.3-B
 
 - Added an internal text formatter for MiniMessage tags, gradients, hex colors, and legacy `&` chat color codes.

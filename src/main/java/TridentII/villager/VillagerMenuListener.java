@@ -134,8 +134,8 @@ public final class VillagerMenuListener implements Listener {
         }
 
         if (event.getRawSlot() == menus.tradeButtonSlot()) {
-            trades.applyStoredCures(player, villager);
             trades.restock(villager);
+            trades.applyStoredCures(player, villager);
             MenuType.MERCHANT.builder()
                 .merchant(villager)
                 .checkReachable(true)

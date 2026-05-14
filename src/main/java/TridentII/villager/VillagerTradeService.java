@@ -48,9 +48,9 @@ public final class VillagerTradeService {
 
             offeredItem.setAmount(offeredItem.getAmount() - offer.amount());
             int cureCount = bribeStorage.addCures(villager, player.getUniqueId(), offer.cureCount(), config.maxCuresPerPlayer());
-            applyCureReputation(player, villager, cureCount);
-            villager.updateDemand();
+            applyCureDiscounts(player, villager, cureCount);
             restock(villager);
+            applyStoredCures(player, villager);
             return true;
         }
 
@@ -63,11 +63,10 @@ public final class VillagerTradeService {
             return;
         }
 
-        applyCureReputation(player, villager, cureCount);
-        villager.updateDemand();
+        applyCureDiscounts(player, villager, cureCount);
     }
 
-    private void applyCureReputation(Player player, Villager villager, int cureCount) {
+    private void applyCureDiscounts(Player player, Villager villager, int cureCount) {
         Reputation reputation = villager.getReputation(player.getUniqueId());
         int cureValue = Math.min(100, cureCount * config.cureReputationValue());
         reputation.setReputation(
@@ -75,5 +74,19 @@ public final class VillagerTradeService {
             Math.max(reputation.getReputation(ReputationType.MAJOR_POSITIVE), cureValue)
         );
         villager.setReputation(player.getUniqueId(), reputation);
+        applyRecipeDiscount(villager, cureCount);
+        villager.updateDemand();
+    }
+
+    private void applyRecipeDiscount(Villager villager, int cureCount) {
+        int discount = Math.min(config.maxPriceDiscount(), cureCount * config.priceDiscountPerCure());
+        List<MerchantRecipe> recipes = new ArrayList<>(villager.getRecipes());
+
+        for (MerchantRecipe recipe : recipes) {
+            recipe.setIgnoreDiscounts(false);
+            recipe.setSpecialPrice(Math.min(recipe.getSpecialPrice(), -discount));
+        }
+
+        villager.setRecipes(recipes);
     }
 }

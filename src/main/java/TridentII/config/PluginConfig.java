@@ -22,6 +22,8 @@ public final class PluginConfig {
     private long restockIntervalTicks;
     private int cureReputationValue;
     private int maxCuresPerPlayer;
+    private int priceDiscountPerCure;
+    private int maxPriceDiscount;
 
     public PluginConfig(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -39,6 +41,8 @@ public final class PluginConfig {
         restockIntervalTicks = Math.max(20L, config.getLong("restock.interval-ticks"));
         cureReputationValue = Math.max(1, config.getInt("bribes.curing.cure-reputation-value", 20));
         maxCuresPerPlayer = Math.max(1, config.getInt("bribes.curing.max-cures-per-player", 5));
+        priceDiscountPerCure = Math.max(1, config.getInt("bribes.curing.price-discount-per-cure", 20));
+        maxPriceDiscount = Math.max(1, config.getInt("bribes.curing.max-price-discount", 100));
     }
 
     public String prefix() {
@@ -83,6 +87,14 @@ public final class PluginConfig {
 
     public int maxCuresPerPlayer() {
         return maxCuresPerPlayer;
+    }
+
+    public int priceDiscountPerCure() {
+        return priceDiscountPerCure;
+    }
+
+    public int maxPriceDiscount() {
+        return maxPriceDiscount;
     }
 
     public int integer(String path) {
