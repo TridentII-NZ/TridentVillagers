@@ -1,5 +1,11 @@
 # Devlog
 
+## Update 1.5-B
+
+- Added shift-click support for moving items from the player inventory into the bribe input slot.
+- Added shift-click support for moving the bribe input stack back into the player inventory.
+- Kept all non-input bribe menu slots protected during shift-click actions.
+
 ## Update 1.4-B
 
 - Fixed bribe discounts not showing in villager trades by applying saved cure counts directly to merchant recipe pricing.

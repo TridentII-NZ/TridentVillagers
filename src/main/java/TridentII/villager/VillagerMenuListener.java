@@ -67,11 +67,6 @@ public final class VillagerMenuListener implements Listener {
             return;
         }
 
-        if (event.isShiftClick()) {
-            event.setCancelled(true);
-            return;
-        }
-
         if (holder.type() == VillagerMenuHolder.MenuType.TRADE) {
             handleTradeMenuClick(event, player, holder);
             return;
@@ -151,6 +146,11 @@ public final class VillagerMenuListener implements Listener {
         int topSize = event.getInventory().getSize();
         boolean clickedTopMenu = rawSlot >= 0 && rawSlot < topSize;
 
+        if (event.isShiftClick()) {
+            handleBribeShiftClick(event, player, clickedTopMenu);
+            return;
+        }
+
         if (clickedTopMenu && rawSlot != menus.bribeInputSlot()) {
             event.setCancelled(true);
         }
@@ -176,6 +176,63 @@ public final class VillagerMenuListener implements Listener {
                 messages.send(player, "messages.bribe-rejected");
             }
         }
+    }
+
+    private void handleBribeShiftClick(InventoryClickEvent event, Player player, boolean clickedTopMenu) {
+        event.setCancelled(true);
+
+        if (clickedTopMenu) {
+            if (event.getRawSlot() == menus.bribeInputSlot()) {
+                moveInputStackToPlayer(event, player);
+            }
+            return;
+        }
+
+        movePlayerStackToInput(event);
+    }
+
+    private void movePlayerStackToInput(InventoryClickEvent event) {
+        ItemStack clicked = event.getCurrentItem();
+        if (clicked == null || clicked.getType() == Material.AIR || clicked.getAmount() <= 0) {
+            return;
+        }
+
+        Inventory menu = event.getInventory();
+        int inputSlot = menus.bribeInputSlot();
+        ItemStack input = menu.getItem(inputSlot);
+
+        if (input == null || input.getType() == Material.AIR || input.getAmount() <= 0) {
+            menu.setItem(inputSlot, clicked.clone());
+            event.setCurrentItem(null);
+            return;
+        }
+
+        if (!input.isSimilar(clicked)) {
+            return;
+        }
+
+        int space = input.getMaxStackSize() - input.getAmount();
+        if (space <= 0) {
+            return;
+        }
+
+        int transferAmount = Math.min(space, clicked.getAmount());
+        input.setAmount(input.getAmount() + transferAmount);
+        clicked.setAmount(clicked.getAmount() - transferAmount);
+
+        if (clicked.getAmount() <= 0) {
+            event.setCurrentItem(null);
+        }
+    }
+
+    private void moveInputStackToPlayer(InventoryClickEvent event, Player player) {
+        ItemStack input = event.getInventory().getItem(menus.bribeInputSlot());
+        if (input == null || input.getType() == Material.AIR || input.getAmount() <= 0) {
+            return;
+        }
+
+        event.getInventory().setItem(menus.bribeInputSlot(), null);
+        player.getInventory().addItem(input).values().forEach(leftover -> event.getInventory().setItem(menus.bribeInputSlot(), leftover));
     }
 
     private void leashVillager(PlayerInteractEntityEvent event, Player player, Villager villager) {

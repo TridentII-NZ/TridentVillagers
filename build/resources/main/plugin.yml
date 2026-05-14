@@ -1,5 +1,5 @@
 name: TridentVillagers
-version: '1.4-B'
+version: '1.5-B'
 
 main: TridentII.TridentVillagers
 api-version: '1.21.11'
