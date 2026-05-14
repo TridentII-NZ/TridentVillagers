@@ -1,5 +1,0 @@
-Villager Restock 
-Villagers always stay restocked
-Villagers can be put on leads
-Can bribe villagers to get cured discounts
-

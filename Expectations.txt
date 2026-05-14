@@ -1,0 +1,21 @@
+Heres my rules and expectations when developing this plugin
+
+* Use the modern Paper API only.
+* Do not use deprecated APIs or legacy Bukkit methods.
+* Setup the prefixes and messages to use gradients, chat colour codes and <grey> colours which the chat side is all handled by my own custom plugin
+* Every message in the plugin must be configurable.
+* Have a configurable prefix in the config.
+* onEnable and onDisable must send configurable startup/shutdown messages using the prefix.
+* No strings should be hardcoded.
+* If tasks need to be run asynchronously, always use async tasks properly.
+* Add tab completion for all commands.
+* Always include a command to reload the plugin configuration.
+* Keep the code clean, modular, and production quality.
+* Automatically update the build up 0.1 
+* After each update put the summary in devlog.md and label per update not by date
+* Suggest any new features in potential-roadmap.md
+
+
+Villagers always stay restocked
+Villagers can be put on leads
+Can bribe villagers to get cured discounts. Set in config for items you can give to the villager to bribe it. When you right click the villager it doesn't open the trades instantly it opens a 27 item GUI (single chest) surrounded in red panes but in slot 12 there's an emerald which opens the normal trades and 16 is a gui for you to design to give the bribes too.

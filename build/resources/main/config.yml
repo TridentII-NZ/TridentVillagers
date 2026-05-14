@@ -1,0 +1,71 @@
+prefix: "<gradient:#00d4ff:#00ff88>TridentVillagers</gradient> <grey>»</grey>"
+
+messages:
+  startup: "%prefix% <grey>enabled.</grey>"
+  shutdown: "%prefix% <grey>disabled.</grey>"
+  reload-success: "%prefix% <grey>configuration reloaded.</grey>"
+  no-permission: "%prefix% <grey>You do not have permission to do that.</grey>"
+  player-only: "%prefix% <grey>Only players can use that command.</grey>"
+  unknown-command: "%prefix% <grey>Unknown command. Try /tridentvillagers reload.</grey>"
+  villager-leashed: "%prefix% <grey>Villager leashed.</grey>"
+  bribe-accepted: "%prefix% <grey>The villager accepts your bribe.</grey>"
+  bribe-rejected: "%prefix% <grey>That item is not an accepted bribe.</grey>"
+  villager-missing: "%prefix% <grey>That villager is no longer available.</grey>"
+
+menus:
+  trade-title: "%prefix% <grey>Villager</grey>"
+  bribe-title: "%prefix% <grey>Bribe Villager</grey>"
+  filler:
+    material: RED_STAINED_GLASS_PANE
+    name: " "
+  trade-button:
+    slot: 12
+    material: EMERALD
+    name: "<gradient:#00ff88:#aaff66>Open Trades</gradient>"
+    lore:
+      - "<grey>View this villager's offers.</grey>"
+  bribe-button:
+    slot: 16
+    material: GOLD_INGOT
+    name: "<gradient:#ffcc66:#ff6666>Offer Bribe</gradient>"
+    lore:
+      - "<grey>Open the bribe menu.</grey>"
+  bribe-input-slot: 13
+  bribe-confirm-button:
+    slot: 16
+    material: LIME_DYE
+    name: "<gradient:#00ff88:#aaff66>Confirm Bribe</gradient>"
+    lore:
+      - "<grey>Place a configured bribe in the center slot.</grey>"
+  bribe-back-button:
+    slot: 10
+    material: ARROW
+    name: "<grey>Back</grey>"
+    lore:
+      - "<grey>Return to the villager menu.</grey>"
+
+features:
+  always-restock: true
+  villager-leads: true
+  bribes: true
+
+restock:
+  interval-ticks: 1200
+  reset-uses: true
+  reset-demand: true
+
+bribes:
+  defaults:
+    major-positive-reputation: 20
+    special-price-discount: 5
+  accepted-items:
+    emerald:
+      material: EMERALD
+      amount: 8
+      major-positive-reputation: 20
+      special-price-discount: 5
+    emerald-block:
+      material: EMERALD_BLOCK
+      amount: 1
+      major-positive-reputation: 50
+      special-price-discount: 10

@@ -1,5 +1,5 @@
 name: TridentVillagers
-version: '${version}'
+version: '1.1-B'
 
 main: TridentII.TridentVillagers
 api-version: '1.21.11'
