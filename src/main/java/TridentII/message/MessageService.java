@@ -2,7 +2,6 @@ package TridentII.message;
 
 import TridentII.config.PluginConfig;
 import TridentII.format.TextFormatter;
-import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,18 +18,18 @@ public final class MessageService {
     }
 
     public void send(CommandSender sender, String messagePath) {
-        sender.sendMessage(component(messagePath));
+        sender.sendMessage(message(messagePath));
     }
 
     public void sendConsole(String messagePath) {
-        plugin.getServer().getConsoleSender().sendMessage(component(messagePath));
+        plugin.getServer().getConsoleSender().sendMessage(message(messagePath));
     }
 
     public String resolve(String messagePath) {
         return config.text(messagePath).replace("%prefix%", config.prefix());
     }
 
-    public Component component(String messagePath) {
+    public String message(String messagePath) {
         return formatter.format(resolve(messagePath));
     }
 }

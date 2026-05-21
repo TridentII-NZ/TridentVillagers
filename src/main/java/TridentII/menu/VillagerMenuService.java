@@ -3,7 +3,6 @@ package TridentII.menu;
 import TridentII.config.PluginConfig;
 import TridentII.format.TextFormatter;
 import java.util.List;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Villager;
@@ -25,7 +24,7 @@ public final class VillagerMenuService {
 
     public Inventory createTradeMenu(Villager villager) {
         VillagerMenuHolder holder = new VillagerMenuHolder(VillagerMenuHolder.MenuType.TRADE, villager.getUniqueId());
-        Inventory inventory = Bukkit.createInventory(holder, MENU_SIZE, component("menus.trade-title"));
+        Inventory inventory = Bukkit.createInventory(holder, MENU_SIZE, message("menus.trade-title"));
         holder.inventory(inventory);
         fillBorder(inventory);
         inventory.setItem(config.integer("menus.trade-button.slot"), configuredItem("menus.trade-button"));
@@ -35,7 +34,7 @@ public final class VillagerMenuService {
 
     public Inventory createBribeMenu(Villager villager) {
         VillagerMenuHolder holder = new VillagerMenuHolder(VillagerMenuHolder.MenuType.BRIBE, villager.getUniqueId());
-        Inventory inventory = Bukkit.createInventory(holder, MENU_SIZE, component("menus.bribe-title"));
+        Inventory inventory = Bukkit.createInventory(holder, MENU_SIZE, message("menus.bribe-title"));
         holder.inventory(inventory);
         fillBorder(inventory);
         inventory.setItem(config.integer("menus.bribe-back-button.slot"), configuredItem("menus.bribe-back-button"));
@@ -76,13 +75,13 @@ public final class VillagerMenuService {
         Material material = config.material(path + ".material", Material.STONE);
         ItemStack itemStack = ItemStack.of(material);
         ItemMeta meta = itemStack.getItemMeta();
-        meta.displayName(component(path + ".name"));
-        List<Component> lore = config.textList(path + ".lore").stream()
+        meta.setDisplayName(message(path + ".name"));
+        List<String> lore = config.textList(path + ".lore").stream()
             .map(this::resolveInline)
             .map(formatter::format)
             .toList();
         if (!lore.isEmpty()) {
-            meta.lore(lore);
+            meta.setLore(lore);
         }
         itemStack.setItemMeta(meta);
         return itemStack;
@@ -92,7 +91,7 @@ public final class VillagerMenuService {
         return resolveInline(config.text(path));
     }
 
-    private Component component(String path) {
+    private String message(String path) {
         return formatter.format(resolve(path));
     }
 

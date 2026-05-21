@@ -1,48 +1,48 @@
-prefix: "<gradient:#00d4ff:#00ff88>TridentVillagers</gradient> <grey>></grey>"
+prefix: "[gradient:#00d4ff:#00ff88]TridentVillagers[/gradient] &7>"
 
 messages:
-  startup: "%prefix% <grey>enabled.</grey>"
-  shutdown: "%prefix% <grey>disabled.</grey>"
-  reload-success: "%prefix% <grey>configuration reloaded.</grey>"
-  no-permission: "%prefix% <grey>You do not have permission to do that.</grey>"
-  player-only: "%prefix% <grey>Only players can use that command.</grey>"
-  unknown-command: "%prefix% <grey>Unknown command. Try /tridentvillagers reload.</grey>"
-  villager-leashed: "%prefix% <grey>Villager leashed.</grey>"
-  bribe-accepted: "%prefix% <grey>The villager accepts your bribe.</grey>"
-  bribe-rejected: "%prefix% <grey>That item is not an accepted bribe.</grey>"
-  villager-missing: "%prefix% <grey>That villager is no longer available.</grey>"
+  startup: "%prefix% &7enabled."
+  shutdown: "%prefix% &7disabled."
+  reload-success: "%prefix% &7configuration reloaded."
+  no-permission: "%prefix% &7You do not have permission to do that."
+  player-only: "%prefix% &7Only players can use that command."
+  unknown-command: "%prefix% &7Unknown command. Try /tridentvillagers reload."
+  villager-leashed: "%prefix% &7Villager leashed."
+  bribe-accepted: "%prefix% &7The villager accepts your bribe."
+  bribe-rejected: "%prefix% &7That item is not an accepted bribe."
+  villager-missing: "%prefix% &7That villager is no longer available."
 
 menus:
-  trade-title: "%prefix% <grey>Villager</grey>"
-  bribe-title: "%prefix% <grey>Bribe Villager</grey>"
+  trade-title: "%prefix% &7Villager"
+  bribe-title: "%prefix% &7Bribe Villager"
   filler:
     material: RED_STAINED_GLASS_PANE
     name: " "
   trade-button:
     slot: 12
     material: EMERALD
-    name: "<gradient:#00ff88:#aaff66>Open Trades</gradient>"
+    name: "[gradient:#00ff88:#aaff66]Open Trades[/gradient]"
     lore:
-      - "<grey>View this villager's offers.</grey>"
+      - "&7View this villager's offers."
   bribe-button:
     slot: 16
     material: GOLD_INGOT
-    name: "<gradient:#ffcc66:#ff6666>Offer Bribe</gradient>"
+    name: "[gradient:#ffcc66:#ff6666]Offer Bribe[/gradient]"
     lore:
-      - "<grey>Open the bribe menu.</grey>"
+      - "&7Open the bribe menu."
   bribe-input-slot: 13
   bribe-confirm-button:
     slot: 16
     material: LIME_DYE
-    name: "<gradient:#00ff88:#aaff66>Confirm Bribe</gradient>"
+    name: "[gradient:#00ff88:#aaff66]Confirm Bribe[/gradient]"
     lore:
-      - "<grey>Place a configured bribe in the center slot.</grey>"
+      - "&7Place a configured bribe in the center slot."
   bribe-back-button:
     slot: 10
     material: ARROW
-    name: "<grey>Back</grey>"
+    name: "&7Back"
     lore:
-      - "<grey>Return to the villager menu.</grey>"
+      - "&7Return to the villager menu."
 
 features:
   always-restock: true
