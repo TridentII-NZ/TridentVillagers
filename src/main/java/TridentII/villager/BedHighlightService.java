@@ -41,6 +41,10 @@ public final class BedHighlightService {
 
             @Override
             public void run() {
+                if (!player.isOnline() || !player.getWorld().equals(center.getWorld())) {
+                    cancel();
+                    return;
+                }
                 if (count++ >= 25) {
                     cancel();
                     return;
