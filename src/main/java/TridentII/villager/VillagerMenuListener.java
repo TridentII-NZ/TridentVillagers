@@ -5,16 +5,15 @@ import TridentII.menu.VillagerMenuHolder;
 import TridentII.menu.VillagerMenuService;
 import TridentII.message.MessageService;
 import io.papermc.paper.event.player.PlayerTradeEvent;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
@@ -29,50 +28,29 @@ public final class VillagerMenuListener implements Listener {
     private final MessageService messages;
     private final VillagerMenuService menus;
     private final VillagerTradeService trades;
-    private final BedHighlightService bedHighlight;
 
     public VillagerMenuListener(
         JavaPlugin plugin,
         PluginConfig config,
         MessageService messages,
         VillagerMenuService menus,
-        VillagerTradeService trades,
-        BedHighlightService bedHighlight
+        VillagerTradeService trades
     ) {
         this.plugin = plugin;
         this.config = config;
         this.messages = messages;
         this.menus = menus;
         this.trades = trades;
-        this.bedHighlight = bedHighlight;
     }
 
     @EventHandler
     public void onVillagerInteract(PlayerInteractEntityEvent event) {
-        if (!(event.getRightClicked() instanceof Villager villager)) {
+        if (event.getHand() != EquipmentSlot.HAND || !(event.getRightClicked() instanceof Villager villager)) {
             return;
         }
 
         Player player = event.getPlayer();
-
-        if (player.isSneaking() && config.bedHighlight()) {
-            event.setCancelled(true);
-            if (event.getHand() == EquipmentSlot.HAND) {
-                bedHighlight.highlight(player, villager);
-            }
-            return;
-        }
-
-        if (event.getHand() != EquipmentSlot.HAND) {
-            return;
-        }
-
         trades.applyStoredCures(player, villager);
-        if (config.villagerLeads() && player.getInventory().getItemInMainHand().getType() == Material.LEAD) {
-            leashVillager(event, player, villager);
-            return;
-        }
-
         event.setCancelled(true);
         player.openInventory(menus.createTradeMenu(villager));
     }
@@ -134,7 +112,6 @@ public final class VillagerMenuListener implements Listener {
             plugin.getServer().getScheduler().runTask(plugin, () -> trades.restock(villager));
         }
     }
-
 
     private void handleTradeMenuClick(InventoryClickEvent event, Player player, VillagerMenuHolder holder) {
         event.setCancelled(true);
@@ -250,21 +227,6 @@ public final class VillagerMenuListener implements Listener {
 
         event.getInventory().setItem(menus.bribeInputSlot(), null);
         player.getInventory().addItem(input).values().forEach(leftover -> event.getInventory().setItem(menus.bribeInputSlot(), leftover));
-    }
-
-    private void leashVillager(PlayerInteractEntityEvent event, Player player, Villager villager) {
-        event.setCancelled(true);
-        if (villager.isLeashed()) {
-            return;
-        }
-
-        if (villager.setLeashHolder(player)) {
-            if (player.getGameMode() != GameMode.CREATIVE) {
-                ItemStack lead = player.getInventory().getItemInMainHand();
-                lead.setAmount(lead.getAmount() - 1);
-            }
-            messages.send(player, "messages.villager-leashed");
-        }
     }
 
     private Villager findVillager(VillagerMenuHolder holder, Player player) {

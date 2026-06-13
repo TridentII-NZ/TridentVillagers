@@ -7,12 +7,9 @@ messages:
   no-permission: "%prefix% &cYou do not have permission to do that."
   player-only: "%prefix% &cOnly players can use that command."
   unknown-command: "%prefix% &cUnknown command. Try /tridentvillagers reload."
-  villager-leashed: "%prefix% &fVillager leashed."
   bribe-accepted: "%prefix% &aThe villager accepts your bribe."
   bribe-rejected: "%prefix% &cThat item is not an accepted bribe."
   villager-missing: "%prefix% &cThat villager is no longer available."
-  bed-highlighted: "%prefix% &fVillager's bed is highlighted."
-  bed-no-bed: "%prefix% &cThis villager has no assigned bed."
 
 menus:
   trade-title: "%prefix% &7Villager"
@@ -48,10 +45,7 @@ menus:
 
 features:
   always-restock: true
-  villager-leads: true
   bribes: true
-  bed-highlight: true
-  always-willing: true
 
 restock:
   interval-ticks: 1200

@@ -1,5 +1,12 @@
 # Devlog
 
+## Update 2.0
+
+- Rewrote plugin from scratch, keeping only auto-restock and the bribe system.
+- Removed villager leads, bed highlight, and always-willing features entirely.
+- No passive entity listeners — plugin only acts on explicit player interactions.
+- Bribe and restock behaviour unchanged from v1.5-B.
+
 ## Update 1.6-B
 
 - Added shift+right-click on a villager to highlight its assigned bed with HAPPY_VILLAGER particles for ~5 seconds, visible only to the clicking player. Sends a configurable message if the villager has no bed assigned.
