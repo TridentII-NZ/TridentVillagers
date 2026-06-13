@@ -7,7 +7,6 @@ import TridentII.message.MessageService;
 import io.papermc.paper.event.player.PlayerTradeEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -136,18 +135,6 @@ public final class VillagerMenuListener implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true)
-    public void onVillagerFoodPickup(EntityPickupItemEvent event) {
-        if (!config.alwaysWilling() || !(event.getEntity() instanceof Villager villager)) {
-            return;
-        }
-
-        Material type = event.getItem().getItemStack().getType();
-        if (type == Material.BREAD || type == Material.CARROT
-                || type == Material.POTATO || type == Material.BEETROOT) {
-            villager.setBreed(true);
-        }
-    }
 
     private void handleTradeMenuClick(InventoryClickEvent event, Player player, VillagerMenuHolder holder) {
         event.setCancelled(true);
