@@ -55,6 +55,13 @@ public final class VillagerMenuListener implements Listener {
         }
 
         Player player = event.getPlayer();
+
+        if (player.isSneaking()) {
+            event.setCancelled(true);
+            bedHighlight.highlight(player, villager);
+            return;
+        }
+
         trades.applyStoredCures(player, villager);
         if (config.villagerLeads() && player.getInventory().getItemInMainHand().getType() == Material.LEAD) {
             leashVillager(event, player, villager);
