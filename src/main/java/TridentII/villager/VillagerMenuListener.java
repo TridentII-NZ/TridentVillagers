@@ -4,7 +4,6 @@ import TridentII.config.PluginConfig;
 import TridentII.menu.VillagerMenuHolder;
 import TridentII.menu.VillagerMenuService;
 import TridentII.message.MessageService;
-import TridentII.villager.BedHighlightService;
 import io.papermc.paper.event.player.PlayerTradeEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -51,15 +50,21 @@ public final class VillagerMenuListener implements Listener {
 
     @EventHandler
     public void onVillagerInteract(PlayerInteractEntityEvent event) {
-        if (event.getHand() != EquipmentSlot.HAND || !(event.getRightClicked() instanceof Villager villager)) {
+        if (!(event.getRightClicked() instanceof Villager villager)) {
             return;
         }
 
         Player player = event.getPlayer();
 
-        if (player.isSneaking()) {
+        if (player.isSneaking() && config.bedHighlight()) {
             event.setCancelled(true);
-            bedHighlight.highlight(player, villager);
+            if (event.getHand() == EquipmentSlot.HAND) {
+                bedHighlight.highlight(player, villager);
+            }
+            return;
+        }
+
+        if (event.getHand() != EquipmentSlot.HAND) {
             return;
         }
 
