@@ -1,5 +1,11 @@
 # Devlog
 
+## Update 1.6-B
+
+- Added shift+right-click on a villager to highlight its assigned bed with HAPPY_VILLAGER particles for ~5 seconds, visible only to the clicking player. Sends a configurable message if the villager has no bed assigned.
+- Added always-willing mode: when a villager picks up bread, carrot, potato, or beetroot it is immediately set breedable, bypassing the breed cooldown.
+- Both features are individually togglable via `features.bed-highlight` and `features.always-willing` in config.yml.
+
 ## Update 1.5-B
 
 - Added shift-click support for moving items from the player inventory into the bribe input slot.
