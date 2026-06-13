@@ -5,6 +5,7 @@ import TridentII.menu.VillagerMenuHolder;
 import TridentII.menu.VillagerMenuService;
 import TridentII.message.MessageService;
 import io.papermc.paper.event.player.PlayerTradeEvent;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -51,6 +52,12 @@ public final class VillagerMenuListener implements Listener {
 
         Player player = event.getPlayer();
         trades.applyStoredCures(player, villager);
+
+        if (config.villagerLeads() && player.getInventory().getItemInMainHand().getType() == Material.LEAD) {
+            leashVillager(event, player, villager);
+            return;
+        }
+
         event.setCancelled(true);
         player.openInventory(menus.createTradeMenu(villager));
     }
@@ -227,6 +234,21 @@ public final class VillagerMenuListener implements Listener {
 
         event.getInventory().setItem(menus.bribeInputSlot(), null);
         player.getInventory().addItem(input).values().forEach(leftover -> event.getInventory().setItem(menus.bribeInputSlot(), leftover));
+    }
+
+    private void leashVillager(PlayerInteractEntityEvent event, Player player, Villager villager) {
+        event.setCancelled(true);
+        if (villager.isLeashed()) {
+            return;
+        }
+
+        if (villager.setLeashHolder(player)) {
+            if (player.getGameMode() != GameMode.CREATIVE) {
+                ItemStack lead = player.getInventory().getItemInMainHand();
+                lead.setAmount(lead.getAmount() - 1);
+            }
+            messages.send(player, "messages.villager-leashed");
+        }
     }
 
     private Villager findVillager(VillagerMenuHolder holder, Player player) {

@@ -15,6 +15,7 @@ public final class PluginConfig {
     private final JavaPlugin plugin;
     private List<BribeOffer> bribeOffers = List.of();
     private boolean alwaysRestock;
+    private boolean villagerLeads;
     private boolean bribesEnabled;
     private boolean resetUses;
     private boolean resetDemand;
@@ -33,6 +34,7 @@ public final class PluginConfig {
         FileConfiguration config = plugin.getConfig();
         bribeOffers = loadBribeOffers(config);
         alwaysRestock = config.getBoolean("features.always-restock");
+        villagerLeads = config.getBoolean("features.villager-leads");
         bribesEnabled = config.getBoolean("features.bribes", true);
         resetUses = config.getBoolean("restock.reset-uses");
         resetDemand = config.getBoolean("restock.reset-demand");
@@ -57,6 +59,10 @@ public final class PluginConfig {
 
     public boolean alwaysRestock() {
         return alwaysRestock;
+    }
+
+    public boolean villagerLeads() {
+        return villagerLeads;
     }
 
     public boolean bribesEnabled() {
