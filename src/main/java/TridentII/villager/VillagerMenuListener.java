@@ -131,7 +131,7 @@ public final class VillagerMenuListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onVillagerFoodPickup(EntityPickupItemEvent event) {
         if (!config.alwaysWilling() || !(event.getEntity() instanceof Villager villager)) {
             return;
