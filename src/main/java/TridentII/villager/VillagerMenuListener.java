@@ -8,6 +8,7 @@ import TridentII.villager.BedHighlightService;
 import io.papermc.paper.event.player.PlayerTradeEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -127,6 +128,19 @@ public final class VillagerMenuListener implements Listener {
         trades.applyStoredCures(event.getPlayer(), villager);
         if (config.alwaysRestock()) {
             plugin.getServer().getScheduler().runTask(plugin, () -> trades.restock(villager));
+        }
+    }
+
+    @EventHandler
+    public void onVillagerFoodPickup(EntityPickupItemEvent event) {
+        if (!config.alwaysWilling() || !(event.getEntity() instanceof Villager villager)) {
+            return;
+        }
+
+        Material type = event.getItem().getItemStack().getType();
+        if (type == Material.BREAD || type == Material.CARROT
+                || type == Material.POTATO || type == Material.BEETROOT) {
+            villager.setBreed(true);
         }
     }
 
