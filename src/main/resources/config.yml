@@ -1,16 +1,18 @@
-prefix: "[gradient:#00d4ff:#00ff88]TridentVillagers[/gradient] &7>"
+prefix: "[gradient:#68f589:#ac6fff:b][TridentVillagers][/gradient]&r"
 
 messages:
-  startup: "%prefix% &7enabled."
-  shutdown: "%prefix% &7disabled."
-  reload-success: "%prefix% &7configuration reloaded."
-  no-permission: "%prefix% &7You do not have permission to do that."
-  player-only: "%prefix% &7Only players can use that command."
-  unknown-command: "%prefix% &7Unknown command. Try /tridentvillagers reload."
-  villager-leashed: "%prefix% &7Villager leashed."
-  bribe-accepted: "%prefix% &7The villager accepts your bribe."
-  bribe-rejected: "%prefix% &7That item is not an accepted bribe."
-  villager-missing: "%prefix% &7That villager is no longer available."
+  startup: "%prefix% &aenabled."
+  shutdown: "%prefix% &fdisabled."
+  reload-success: "%prefix% &aconfiguration reloaded."
+  no-permission: "%prefix% &cYou do not have permission to do that."
+  player-only: "%prefix% &cOnly players can use that command."
+  unknown-command: "%prefix% &cUnknown command. Try /tridentvillagers reload."
+  villager-leashed: "%prefix% &fVillager leashed."
+  bribe-accepted: "%prefix% &aThe villager accepts your bribe."
+  bribe-rejected: "%prefix% &cThat item is not an accepted bribe."
+  villager-missing: "%prefix% &cThat villager is no longer available."
+  bed-highlighted: "%prefix% &fVillager's bed is highlighted."
+  bed-no-bed: "%prefix% &cThis villager has no assigned bed."
 
 menus:
   trade-title: "%prefix% &7Villager"
@@ -48,6 +50,8 @@ features:
   always-restock: true
   villager-leads: true
   bribes: true
+  bed-highlight: true
+  always-willing: true
 
 restock:
   interval-ticks: 1200

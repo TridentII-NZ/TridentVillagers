@@ -19,6 +19,8 @@ public final class PluginConfig {
     private boolean bribesEnabled;
     private boolean resetUses;
     private boolean resetDemand;
+    private boolean bedHighlight;
+    private boolean alwaysWilling;
     private long restockIntervalTicks;
     private int cureReputationValue;
     private int maxCuresPerPlayer;
@@ -36,6 +38,8 @@ public final class PluginConfig {
         alwaysRestock = config.getBoolean("features.always-restock");
         villagerLeads = config.getBoolean("features.villager-leads");
         bribesEnabled = config.getBoolean("features.bribes");
+        bedHighlight = config.getBoolean("features.bed-highlight");
+        alwaysWilling = config.getBoolean("features.always-willing");
         resetUses = config.getBoolean("restock.reset-uses");
         resetDemand = config.getBoolean("restock.reset-demand");
         restockIntervalTicks = Math.max(20L, config.getLong("restock.interval-ticks"));
@@ -67,6 +71,14 @@ public final class PluginConfig {
 
     public boolean bribesEnabled() {
         return bribesEnabled;
+    }
+
+    public boolean bedHighlight() {
+        return bedHighlight;
+    }
+
+    public boolean alwaysWilling() {
+        return alwaysWilling;
     }
 
     public boolean resetUses() {
