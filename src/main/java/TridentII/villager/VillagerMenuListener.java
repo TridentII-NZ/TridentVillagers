@@ -4,6 +4,7 @@ import TridentII.config.PluginConfig;
 import TridentII.menu.VillagerMenuHolder;
 import TridentII.menu.VillagerMenuService;
 import TridentII.message.MessageService;
+import TridentII.villager.BedHighlightService;
 import io.papermc.paper.event.player.PlayerTradeEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -29,19 +30,22 @@ public final class VillagerMenuListener implements Listener {
     private final MessageService messages;
     private final VillagerMenuService menus;
     private final VillagerTradeService trades;
+    private final BedHighlightService bedHighlight;
 
     public VillagerMenuListener(
         JavaPlugin plugin,
         PluginConfig config,
         MessageService messages,
         VillagerMenuService menus,
-        VillagerTradeService trades
+        VillagerTradeService trades,
+        BedHighlightService bedHighlight
     ) {
         this.plugin = plugin;
         this.config = config;
         this.messages = messages;
         this.menus = menus;
         this.trades = trades;
+        this.bedHighlight = bedHighlight;
     }
 
     @EventHandler

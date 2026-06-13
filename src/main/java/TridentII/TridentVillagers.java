@@ -5,6 +5,7 @@ import TridentII.config.PluginConfig;
 import TridentII.format.TextFormatter;
 import TridentII.message.MessageService;
 import TridentII.menu.VillagerMenuService;
+import TridentII.villager.BedHighlightService;
 import TridentII.villager.BribeStorage;
 import TridentII.villager.RestockService;
 import TridentII.villager.VillagerMenuListener;
@@ -52,7 +53,8 @@ public final class TridentVillagers extends JavaPlugin {
         messageService = new MessageService(this, pluginConfig, formatter);
         VillagerTradeService tradeService = new VillagerTradeService(pluginConfig, bribeStorage);
         VillagerMenuService menuService = new VillagerMenuService(pluginConfig, formatter);
-        menuListener = new VillagerMenuListener(this, pluginConfig, messageService, menuService, tradeService);
+        BedHighlightService bedHighlightService = new BedHighlightService(this, pluginConfig, messageService);
+        menuListener = new VillagerMenuListener(this, pluginConfig, messageService, menuService, tradeService, bedHighlightService);
         restockService = new RestockService(this, pluginConfig, tradeService);
     }
 
